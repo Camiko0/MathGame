@@ -20,10 +20,48 @@ export class AppComponent {
 
   // Parte de Inicio
   parteInicio = true;
+  // Parte de Nivel
+  parteNivel = false;
   // Parte de Jugar
   parteJugar = false;
   // Parte de Instrucciones
   parteInstrucciones = false;
+
+  // Seleccionar las operaciones según el nivel de dificultad
+  operacionesPorNivel(nivel) {
+    switch (nivel) {
+      case 'SuperFacil': {
+        this.numeros = [[5, 2, 7], [12, 8, 22], [22, 17, 39], [13, 12, 25], [19, 3, 21]];
+        this.operaciones = ['Suma', 'Suma', 'Suma', 'Suma', 'Suma'];
+        this.reiniciar();
+        break;
+      }
+      case 'Facil': {
+        this.numeros = [[21, 43, 74], [47, 32, 16], [87, 34, 53], [65, 34, 99], [77, 22, 45]];
+        this.operaciones = ['Suma', 'Resta', 'Resta', 'Suma', 'Resta'];
+        this.reiniciar();
+        break;
+      }
+      case 'Medio': {
+        this.numeros = [[12, 4, 48], [127, 32, 95], [100, 4, 25], [128, 4, 30], [20, 4, 100]];
+        this.operaciones = ['Multiplicación', 'Resta', 'División', 'División', 'Multiplicación'];
+        this.reiniciar();
+        break;
+      }
+      case 'Dificil': {
+        this.numeros = [[240, 40, 5], [2, 4, 16], [123, 4, 392], [600, 3, 20], [4, 3, 64]];
+        this.operaciones = ['División', 'Potencia', 'Multiplicación', 'División', 'Potencia'];
+        this.reiniciar();
+        break;
+      }
+      case 'SuperDificil': {
+        this.numeros = [[125, 3, 5], [10, 3, 10000], [205, 12, 2450], [512, 3, 8], [6, 3, 116]];
+        this.operaciones = ['Raíz', 'Potencia', 'Multiplicación', 'Raíz', 'Potencia'];
+        this.reiniciar();
+        break;
+      }
+   }
+  }
 
   // Cuando se selecciona el botón Verdadero
   hacerOperacionVerdadero(operacion, posicion) {
@@ -58,12 +96,41 @@ export class AppComponent {
         this.seleccionado[posicion] = true;
         break;
       }
+      case 'División': {
+        if (this.numeros[posicion][0] / this.numeros[posicion][1] === this.numeros[posicion][2]) {
+          this.resultados[posicion] = true;
+          this.acertados = this.acertados + 1;
+        } else {
+         this.resultados[posicion] = false;
+        }
+        this.seleccionado[posicion] = true;
+        break;
+      }
       case 'Potencia': {
         if (Math.pow(this.numeros[posicion][0], this.numeros[posicion][1]) === this.numeros[posicion][2]) {
           this.resultados[posicion] = true;
           this.acertados = this.acertados + 1;
         } else {
          this.resultados[posicion] = false;
+        }
+        this.seleccionado[posicion] = true;
+        break;
+      }
+      case 'Raíz': {
+        if (this.numeros[posicion][1] === 2) {
+          if (Math.sqrt(this.numeros[posicion][0]) === this.numeros[posicion][2]) {
+            this.resultados[posicion] = true;
+            this.acertados = this.acertados + 1;
+          } else {
+           this.resultados[posicion] = false;
+          }
+        } else if (this.numeros[posicion][1] === 3) {
+          if (Math.cbrt(this.numeros[posicion][0]) === this.numeros[posicion][2]) {
+            this.resultados[posicion] = true;
+            this.acertados = this.acertados + 1;
+          } else {
+           this.resultados[posicion] = false;
+          }
         }
         this.seleccionado[posicion] = true;
         break;
@@ -124,11 +191,21 @@ export class AppComponent {
     this.acertados = 0;
   }
 
+  // Niveles
+  nivel() {
+    this.parteNivel = true;
+    this.parteInicio = false;
+    this.parteJugar = false;
+    this.parteInstrucciones = false;
+  }
+
   // Jugar
-  jugar() {
+  jugar(nivel) {
     this.parteJugar = true;
     this.parteInicio = false;
+    this.parteNivel = false;
     this.parteInstrucciones = false;
+    this.operacionesPorNivel(nivel);
   }
 
   // Instrucciones
@@ -136,5 +213,6 @@ export class AppComponent {
     this.parteInstrucciones = true;
     this.parteInicio = false;
     this.parteJugar = false;
+    this.parteNivel = false;
   }
 }
