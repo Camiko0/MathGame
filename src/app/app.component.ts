@@ -142,41 +142,70 @@ export class AppComponent {
   hacerOperacionFalso(operacion, posicion) {
     switch (operacion) {
       case 'Suma': {
-         if (this.numeros[posicion][0] + this.numeros[posicion][1] === this.numeros[posicion][2]) {
-           this.resultados[posicion] = false;
+         if (this.numeros[posicion][0] + this.numeros[posicion][1] !== this.numeros[posicion][2]) {
+           this.resultados[posicion] = true;
+           this.acertados = this.acertados + 1;
          } else {
-          this.resultados[posicion] = true;
-          this.acertados = this.acertados + 1;
+          this.resultados[posicion] = false;
          }
          this.seleccionado[posicion] = true;
          break;
       }
       case 'Resta': {
-        if (this.numeros[posicion][0] - this.numeros[posicion][1] === this.numeros[posicion][2]) {
-          this.resultados[posicion] = false;
+        if (this.numeros[posicion][0] - this.numeros[posicion][1] !== this.numeros[posicion][2]) {
+          this.resultados[posicion] = true;
+          this.acertados = this.acertados + 1;
         } else {
-         this.resultados[posicion] = true;
-         this.acertados = this.acertados + 1;
+         this.resultados[posicion] = false;
         }
         this.seleccionado[posicion] = true;
         break;
       }
       case 'Multiplicación': {
-        if (this.numeros[posicion][0] * this.numeros[posicion][1] === this.numeros[posicion][2]) {
-          this.resultados[posicion] = false;
+        if (this.numeros[posicion][0] * this.numeros[posicion][1] !== this.numeros[posicion][2]) {
+          this.resultados[posicion] = true;
+          this.acertados = this.acertados + 1;
         } else {
-         this.resultados[posicion] = true;
-         this.acertados = this.acertados + 1;
+         this.resultados[posicion] = false;
+        }
+        this.seleccionado[posicion] = true;
+        break;
+      }
+      case 'División': {
+        if (this.numeros[posicion][0] / this.numeros[posicion][1] !== this.numeros[posicion][2]) {
+          this.resultados[posicion] = true;
+          this.acertados = this.acertados + 1;
+        } else {
+         this.resultados[posicion] = false;
         }
         this.seleccionado[posicion] = true;
         break;
       }
       case 'Potencia': {
-        if (Math.pow(this.numeros[posicion][0], this.numeros[posicion][1]) === this.numeros[posicion][2]) {
-          this.resultados[posicion] = false;
+        if (Math.pow(this.numeros[posicion][0], this.numeros[posicion][1]) !== this.numeros[posicion][2]) {
+          this.resultados[posicion] = true;
+          this.acertados = this.acertados + 1;
         } else {
-         this.resultados[posicion] = true;
-         this.acertados = this.acertados + 1;
+         this.resultados[posicion] = false;
+        }
+        this.seleccionado[posicion] = true;
+        break;
+      }
+      case 'Raíz': {
+        if (this.numeros[posicion][1] === 2) {
+          if (Math.sqrt(this.numeros[posicion][0]) !== this.numeros[posicion][2]) {
+            this.resultados[posicion] = true;
+            this.acertados = this.acertados + 1;
+          } else {
+           this.resultados[posicion] = false;
+          }
+        } else if (this.numeros[posicion][1] === 3) {
+          if (Math.cbrt(this.numeros[posicion][0]) !== this.numeros[posicion][2]) {
+            this.resultados[posicion] = true;
+            this.acertados = this.acertados + 1;
+          } else {
+           this.resultados[posicion] = false;
+          }
         }
         this.seleccionado[posicion] = true;
         break;
