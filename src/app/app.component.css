@@ -1,4 +1,4 @@
-.alert {
+.alert, .td, .tr {
     text-align: center;
     font-weight: bolder;
 }
@@ -6,4 +6,10 @@
 .card {
     border: 3px solid rgba(0, 0, 0, .125);
     border-radius: .25rem;
+}
+
+.enunciado {
+  background-color: rgb(167, 167, 168);
+  text-align: center;
+  font-weight: bolder;
 }
